@@ -43,6 +43,9 @@ jobs:
       - name: Setup QEMU
         uses: docker/setup-qemu-action@v1
         id: qemu
+        with:
+          image: tonistiigi/binfmt:latest
+          platforms: all
 
       - name: Build Web Docker image
         uses: docker/build-push-action@v4
@@ -232,6 +235,9 @@ jobs:
       - name: Setup QEMU
         uses: docker/setup-qemu-action@v1
         id: qemu
+        with:
+          image: tonistiigi/binfmt:latest
+          platforms: all
       - name: Setup node
         uses: actions/setup-node@v3
         with:

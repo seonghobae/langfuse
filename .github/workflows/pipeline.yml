@@ -53,7 +53,7 @@ jobs:
           context: .
           file: ./web/Dockerfile
           push: false
-          platforms: echo ${{ steps.qemu.outputs.platforms }}
+          platforms: ${{ steps.qemu.outputs.platforms }}
 
       - name: Build Worker Docker image
         uses: docker/build-push-action@v4
@@ -61,7 +61,7 @@ jobs:
           context: .
           file: ./worker/Dockerfile
           push: false
-          platforms: echo ${{ steps.qemu.outputs.platforms }}
+          platforms: ${{ steps.qemu.outputs.platforms }}
 
   tests-web:
     runs-on: ubuntu-latest
@@ -280,7 +280,7 @@ jobs:
           context: .
           file: ./web/Dockerfile
           push: true
-          platforms: echo ${{ steps.qemu.outputs.platforms }}
+          platforms: ${{ steps.qemu.outputs.platforms }}
           tags: ${{ steps.meta-web.outputs.tags }}
           labels: ${{ steps.meta-web.outputs.labels }}
 
@@ -304,6 +304,6 @@ jobs:
           context: .
           file: ./worker/Dockerfile
           push: true
-          platforms: echo ${{ steps.qemu.outputs.platforms }}
+          platforms: ${{ steps.qemu.outputs.platforms }}
           tags: ${{ steps.meta-worker.outputs.tags }}
           labels: ${{ steps.meta-worker.outputs.labels }}

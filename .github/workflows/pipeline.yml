@@ -40,12 +40,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@v1
+        id: qemu
+
       - name: Build Web Docker image
         uses: docker/build-push-action@v4
         with:
           context: .
           file: ./web/Dockerfile
           push: false
+          platforms: all
 
       - name: Build Worker Docker image
         uses: docker/build-push-action@v4
@@ -53,6 +58,7 @@ jobs:
           context: .
           file: ./worker/Dockerfile
           push: false
+          platforms: all
 
   tests-web:
     runs-on: ubuntu-latest
@@ -223,6 +229,9 @@ jobs:
       - uses: pnpm/action-setup@v3
         with:
           version: 8.15.5
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@v1
+        id: qemu
       - name: Setup node
         uses: actions/setup-node@v3
         with:
@@ -250,8 +259,7 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            ghcr.io/langfuse/langfuse # GitHub
-            langfuse/langfuse # Docker Hub
+            ghcr.io/seonghobae/langfuse # GitHub
           tags: |
             type=ref,event=branch
             type=ref,event=pr
@@ -266,6 +274,7 @@ jobs:
           context: .
           file: ./web/Dockerfile
           push: true
+          platforms: all
           tags: ${{ steps.meta-web.outputs.tags }}
           labels: ${{ steps.meta-web.outputs.labels }}
 
@@ -274,8 +283,7 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            ghcr.io/langfuse/langfuse-worker # GitHub
-            langfuse/langfuse-worker # Docker Hub
+            ghcr.io/seonghobae/langfuse-worker # GitHub
           tags: |
             type=ref,event=branch
             type=ref,event=pr
@@ -290,5 +298,6 @@ jobs:
           context: .
           file: ./worker/Dockerfile
           push: true
+          platforms: all
           tags: ${{ steps.meta-worker.outputs.tags }}
           labels: ${{ steps.meta-worker.outputs.labels }}

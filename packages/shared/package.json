@@ -45,13 +45,13 @@
   },
   "dependencies": {
     "@langchain/anthropic": "^0.1.16",
-    "@langchain/core": "^0.1.61",
+    "@langchain/core": "^0.3.80",
     "@langchain/openai": "^0.0.28",
     "@prisma/client": "^5.13.0",
     "@types/bcryptjs": "^2.4.6",
     "bcryptjs": "^2.4.3",
     "kysely": "^0.27.3",
-    "langchain": "^0.1.36",
+    "langchain": "^0.2.19",
     "prisma-extension-kysely": "^2.1.0",
     "zod": "^3.22.4",
     "zod-to-json-schema": "^3.22.5"
@@ -77,6 +77,6 @@
     "ts-node": "^10.9.2",
     "tsc-watch": "^6.2.0",
     "typescript": "^5.4.5",
-    "vitest": "^1.5.3"
+    "vitest": "^1.6.1"
   }
 }
